@@ -1,0 +1,80 @@
+
+.back-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  font-size: 32px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 21.5px;
+  left: 84px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+  font-size: 24px;
+  font-weight: 400;
+}
+.back-button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: none;
+  font-size: 24px; 
+  font-weight: 400;
+  cursor: pointer;
+  position: absolute;
+  top: 21.5px;
+  left: 84px;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+
+@media (max-width: 393px) {
+  .back-button {
+    width: 48px;
+    height: 48px;
+    font-size: 20px;
+    top: 15px;
+    left: 20px;
+  }
+}
+
+
+@media (min-width: 394px) and (max-width: 768px) {
+  .back-button {
+    width: 52px;
+    height: 52px;
+    font-size: 22px;
+    top: 18px;
+    left: 60px;
+  }
+}
+
+
+@media (min-width: 769px) and (max-width: 1440px) {
+  .back-button {
+    width: 56px;
+    height: 56px;
+    font-size: 24px;
+    top: 21.5px;
+    left: 84px;
+  }
+}
+
+@media (min-width: 1441px) {
+  .back-button {
+    width: 60px;
+    height: 60px;
+    font-size: 26px;
+    top: 25px;
+    left: 100px;
+  }
+}

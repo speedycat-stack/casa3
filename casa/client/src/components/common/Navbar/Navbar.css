@@ -1,0 +1,132 @@
+.custom-navbar {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 1307px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: #999999;
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-family: 'Switzer', sans-serif;
+  z-index: 1000;
+}
+
+.custom-navbar.inscription-navbar {
+  background-color: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-logo {
+  width: 33.839px;
+  height: 22.131px;
+}
+
+.custom-nav-links {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-nav-links li a {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  text-transform: uppercase;
+}
+
+.custom-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.join-btn {
+  width: 108px;
+  height: 30px;
+  background-color: #7FB5FF;
+  border: none;
+  border-radius: 34px;
+  padding: 8px 24px;
+  color: #0E0E0E;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: Bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 34px;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    padding: 0 20px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+  }
+
+  .menu-icon {
+    display: block;
+    order: 1;
+    margin-right: auto;
+    padding: 0 10px;
+  }
+
+  .custom-nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 20px 0;
+    margin-top: 10px;
+    background:#7FB5FF;
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+  }
+
+  .custom-nav-links.mobile-open {
+    display: flex;
+  }
+
+  .custom-right {
+    order: 2;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-navbar {
+    width: 90%;
+  }
+
+  .join-btn {
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}

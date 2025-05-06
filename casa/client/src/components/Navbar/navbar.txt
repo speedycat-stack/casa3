@@ -1,0 +1,381 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom'; 
+import './Navbar.css';
+import logo from '../../assets/C-blanc.png';
+
+const Navbar = ({ linkColor = "#FFFFFF", logoSrc = logo }) => {
+  const location = useLocation(); 
+  const [isInscription, setIsInscription] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (location.pathname === "/inscription") {
+      setIsInscription(true);
+    } else {
+      setIsInscription(false);
+    }
+  }, [location]);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <div className={`custom-navbar ${isInscription ? 'inscription-navbar' : ''}`}>
+      <img src={logoSrc} alt="Logo" className="custom-logo" />
+
+      {isMobile && (
+        <div className="menu-icon" onClick={toggleMenu}>
+          {isMenuOpen ? '✕' : '☰'}
+        </div>
+      )}
+
+      <ul className={`custom-nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
+        <li><Link to="/" style={{ color: linkColor }}>HOME</Link></li>
+        <li><Link to="/product" style={{ color: linkColor }}>PRODUCT</Link></li>
+        <li><Link to="/map" style={{ color: linkColor }}>MAP</Link></li>
+        <li><Link to="/contact" style={{ color: linkColor }}>CONTACT</Link></li>
+      </ul>
+
+      <div className="custom-right">
+        <Link to="/card">
+          <span className="cart-icon">🛒</span>
+        </Link>
+        <Link to="/inscription">
+          <button className="join-btn">JOIN US</button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;
+
+.custom-navbar {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 1307px;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  font-family: 'Switzer', sans-serif;
+  z-index: 1000;
+}
+
+.custom-navbar.inscription-navbar {
+  background-color: rgba(255, 255, 255, 0.5); 
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.custom-logo {
+  width: 33.839px;
+  height: 22.131px;
+}
+
+.custom-nav-links {
+  display: flex;
+  list-style: none;
+  gap: 40px;
+  margin: 0;
+  padding: 0;
+}
+
+.custom-nav-links li a {
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.custom-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle;
+  text-decoration: none; 
+  border: none; 
+  outline: none; 
+  color: white;
+}
+
+.join-btn {
+  width: 108px;
+  height: 37px;
+  background-color: #7FB5FF;
+  border: none;
+  border-radius: 34px;
+  padding: 8px 24px;
+  color: #0E0E0E;
+  font-weight: 500;
+  font-size: 12px;
+  font-family: Bold;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.menu-icon {
+  display: none;
+  font-size: 34px;
+  cursor: pointer;
+  color: white;
+}
+
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    padding: 0 20px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+  }
+
+  .menu-icon {
+    display: block;
+    order: 1;
+    margin-right: auto;
+    padding: 0 10px;
+  }
+
+  .custom-nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 20px 0;
+    margin-top: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+  }
+
+  .custom-nav-links.mobile-open {
+    display: flex;
+  }
+
+  .custom-right {
+    order: 2;
+    margin-left: 10px;
+    
+  }
+}
+
+@media (max-width: 480px) {
+  .custom-navbar {
+    width: 90%;
+  }
+
+  .join-btn {
+    
+    padding: 8px 12px;
+    font-size: 10px;
+  }
+}
+
+________________________
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import './Navbar2.css';
+import logoBleu from '../../assets/C-bleu.png';
+
+const Navbar2 = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+      if (window.innerWidth >= 768) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  return (
+    <div className="navbar2">
+      <img src={logoBleu} alt="Logo" className="navbar2-logo" />
+
+      {/* Bouton hamburger en mode mobile */}
+      {isMobile && (
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          {isMenuOpen ? '✕' : '☰'}
+        </div>
+      )}
+
+      <ul className={`navbar2-links ${isMenuOpen ? 'mobile-open' : ''}`}>
+        <li><Link to="/">HOME</Link></li>
+        <li><Link to="/product">PRODUCT</Link></li>
+        <li><Link to="/map">MAP</Link></li>
+        <li><Link to="/contact">CONTACT</Link></li>
+      </ul>
+
+      <div className="navbar2-right">
+        <Link to="/card">
+          <span className="cart-icon">🛒</span>
+        </Link>
+        <Link to="/inscription">
+          <button className="join-btn">JOIN US</button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export default Navbar2;
+
+
+.navbar2 {
+  background-color: white;
+  border-radius: 18px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  font-family: 'Switzer', sans-serif;
+  z-index: 1000;
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  max-width: 1307px;
+}
+
+.navbar2-logo {
+  width: 34px;
+  height: auto;
+}
+
+.navbar2-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar2-links a {
+  text-decoration: none;
+  color: #4B4B4B;
+  font-weight: 500;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+
+.navbar2-right {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.cart-icon {
+  font-size: 24px; 
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: middle; 
+  text-decoration: none; 
+  border: none;
+  outline: none; 
+}
+
+.join-btn {
+  background-color: #7FB5FF;
+  color: #0E0E0E;
+  padding: 8px 24px;
+  border: none;
+  border-radius: 34px;
+  font-weight: 500;
+  font-size: 12px;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+
+.hamburger-menu {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #4B4B4B;
+}
+
+/* Styles pour le mode mobile */
+@media (max-width: 768px) {
+  .navbar2 {
+    padding: 0 20px;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: 56px;
+  }
+
+  .hamburger-menu {
+    display: block;
+    order: 1;
+    margin-right: auto;
+    padding: 0 10px;
+  }
+
+  .navbar2-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    padding: 20px 0;
+    margin-top: 10px;
+    border-top: 1px solid #f0f0f0;
+  }
+
+  .navbar2-links.mobile-open {
+    display: flex;
+  }
+
+  .navbar2-right {
+    order: 2;
+    margin-left: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar2 {
+    width: 90%;
+  }
+
+  .join-btn {
+    padding: 8px 15px;
+    font-size: 11px;
+  }
+}

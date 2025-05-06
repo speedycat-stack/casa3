@@ -1,0 +1,170 @@
+// Product.js
+import React, { useState } from 'react';
+import './Product.css'; 
+import farina from "../../assets/farina.png";
+import hlib from "../../assets/hlib.jpg";
+import hrissa from "../../assets/hrissa.png";
+import makarouna from "../../assets/makarouna.png";
+import ProductModal from './ProductModal';
+import AddtoModal from './AddtoModal'; 
+
+const products = [
+  { id: 1, name: "Farina", price: "1DT", image: farina },
+  { id: 2, name: "Hlib Délice", price: "1DT", image: hlib },
+  { id: 3, name: "Hrissa", price: "1DT", image: hrissa },
+  { id: 4, name: "Makarouna", price: "1DT", image: makarouna },
+  { id: 5, name: "Farina", price: "1DT", image: farina },
+  { id: 6, name: "Hlib Délice", price: "1DT", image: hlib },
+  { id: 7, name: "Hrissa", price: "1DT", image: hrissa },
+  { id: 8, name: "Makarouna", price: "1DT", image: makarouna },
+  { id: 9, name: "Hlib Délice", price: "1DT", image: hlib },
+];
+
+const Product = () => {
+  const [modalProduct, setModalProduct] = useState(null); 
+  const [showAddToCartModal, setShowAddToCartModal] = useState(false); 
+
+  const openProductModal = (product) => {
+    setModalProduct(product); 
+    document.body.classList.add('modal-open'); 
+  };
+
+  const closeProductModal = () => {
+    setModalProduct(null);
+    document.body.classList.remove('modal-open'); 
+  };
+
+  const openAddToCartModal = (product) => {
+    setShowAddToCartModal(true); 
+    setModalProduct(product); 
+  };
+
+  const closeAddToCartModal = () => {
+    setShowAddToCartModal(false); 
+    document.body.classList.remove('modal-open');
+  };
+
+  return (
+    <div className="product-container">
+      {products.map((product) => (
+        <div className="product-card" key={product.id} onClick={() => openProductModal(product)}>
+          <img src={product.image} alt={product.name} className="product-image" />
+          <div className="product-info">
+            <h3 className="product-name">{product.name}</h3>
+            <p className="product-price">{product.price}</p>
+            <button 
+              className="add-to-cart-btn" 
+              onClick={(e) => {
+                e.stopPropagation();
+                openAddToCartModal(product);
+              }}
+            >
+              +
+            </button>
+          </div>
+        </div>
+      ))}
+
+      {modalProduct && (
+        <ProductModal 
+          product={modalProduct} 
+          onClose={closeProductModal} 
+          onAddToCart={openAddToCartModal} 
+        />
+      )}
+
+      {showAddToCartModal && (
+        <AddtoModal 
+          product={modalProduct} 
+          onClose={closeAddToCartModal} 
+        />
+      )}
+    </div>
+  );
+};
+
+export default Product;
+
+/* Product.css */
+.product-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 35px; 
+  padding: 50px 20px; 
+  margin: 50px auto;
+  max-width: 1000px; 
+}
+
+.product-card {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 300px;
+}
+
+.product-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.product-info {
+  width: 100%;
+}
+
+.product-name {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #000;
+}
+
+.product-price {
+  font-size: 15px;
+  font-weight: bold;
+  color: #d10000;
+  margin-top: 5px;
+}
+
+.add-to-cart-btn {
+  margin-top: 15px;
+  background-color: #0D0235;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #2c275e;
+}
+
+@media (max-width: 1024px) {
+  .product-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .product-container {
+    grid-template-columns: 1fr;
+  }
+}
